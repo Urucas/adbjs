@@ -1,0 +1,29 @@
+{
+  "name": "adbjs",
+  "version": "0.0.1",
+  "description": "Call adb methods from node",
+  "main": "bin/adbjs",
+  "scripts": {
+    "install": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Urucas/adbjs.git"
+  },
+  "keywords": [
+    "adb",
+    "android",
+    "node",
+    "javascript",
+    "js"
+  ],
+  "author": "Urucas <hello@urucas.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Urucas/adbjs/issues"
+  },
+  "homepage": "https://github.com/Urucas/adbjs",
+  "dependencies": {
+    "babel": "^5.1.13"
+  }
+}
