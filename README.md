@@ -1,6 +1,14 @@
 # adbjs
 Use adb from node
 
+#Requirements
+* ADB
+
+#Install
+```bash
+npm install --save adbjs
+```
+
 #Usage
 ```javascript
 var ADB = new (require('adbjs'))();
