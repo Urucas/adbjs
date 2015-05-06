@@ -1,11 +1,11 @@
 
-BABEL = ./node_modules/.bin/babel
+BABEL = $(PWD)/node_modules/.bin/babel
 
 all: node
 
 node: lib
 	@mkdir -p ./bin
-	$(BABEL) "lib/adb.js" > "bin/adbjs"
+	$(BABEL) "./lib/adb.js" > "./bin/adbjs"
 
 clean:
-	@rm -rf ./node/
+	@rm -rf ./bin/

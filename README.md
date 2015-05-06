@@ -9,6 +9,12 @@ Use adb from node
 npm install --save adbjs
 ```
 
+#Build
+```bash
+git clone https://github.com/Urucas/adbjs.git
+npm run build
+```
+
 #Usage
 ```javascript
 var ADB = new (require('adbjs'))();
