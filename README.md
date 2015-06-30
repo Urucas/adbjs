@@ -32,6 +32,11 @@ console.log(devices)
 // select device
 ADB.selectDevice(devices[0]);
 
+// check if device is available
+var isAvailable = ADB.isDeviceAvailable('07042e0e13cca2d0');
+console.log(isAvailable);
+// true
+
 // list installed packages
 var packages = ADB.listPackages();
 /* 
