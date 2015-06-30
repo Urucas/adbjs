@@ -19,6 +19,11 @@ npm run build
 ```javascript
 var ADB = new (require('adbjs'))();
 
+// Getting adb version
+var version = ADB.version();
+console.log(version);
+// Android Debug Bridge version 1.0.32
+
 // Getting devices
 var devices = ADB.devices()
 console.log(devices)
