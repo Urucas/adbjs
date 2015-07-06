@@ -70,6 +70,33 @@ var ADB = (function () {
       return this.device;
     }
   }, {
+    key: 'deviceInfo',
+    value: function deviceInfo(device) {
+
+      if (!this.isDeviceAvailable(device)) {
+        throw new Error('No device selected');
+        return;
+      }
+      var info = {
+        id: device
+      };
+
+      var child = _child_process2['default'].spawnSync('adb', ['-s', device, 'shell', 'getprop', 'ro.product.model']);
+      if (child.stderr && child.stderr.toString() != '') {
+        throw new Error(' ' + child.stderr);
+        return;
+      }
+      info.model = child.stdout.toString().replace('\r\n', '');
+
+      child = _child_process2['default'].spawnSync('adb', ['-s', device, 'shell', 'getprop', 'ro.build.version.release']);
+      if (child.stderr && child.stderr.toString() != '') {
+        throw new Error(' ' + child.stderr);
+        return;
+      }
+      info.version = child.stdout.toString().replace('\r\n', '');
+      return info;
+    }
+  }, {
     key: 'selectDevice',
     value: function selectDevice(device) {
       this.selected_device = device;
