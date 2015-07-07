@@ -29,6 +29,10 @@ var devices = ADB.devices()
 console.log(devices)
 // [ '07042e0e13cca2d0' ]
 
+var deviceInfo = ADB.deviceInfo(devices[0]);
+console.log(deviceInfo);
+// { id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' }
+
 // select device
 ADB.selectDevice(devices[0]);
 
