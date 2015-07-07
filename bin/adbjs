@@ -70,6 +70,34 @@ var ADB = (function () {
       return this.device;
     }
   }, {
+    key: 'userProcessList',
+    value: function userProcessList(device) {
+
+      if (!this.isDeviceAvailable(device)) {
+        throw new Error('No device selected');
+        return;
+      }
+      var child = _child_process2['default'].spawnSync('adb', ['-s', device, 'shell', 'ps']);
+      if (child.stderr && child.stderr.toString() != '') {
+        throw new Error(' ' + child.stderr);
+        return;
+      }
+      var output = child.stdout.toString().split('\r\n');
+      var list = [];
+      for (var i = 0; i < output.length; i++) {
+        var _process = output[i];
+        if (!/u\d_\w\d+/.test(_process)) continue;
+        _process = _process.split(/\s+/);
+        _process = {
+          user: _process[0],
+          pid: _process[1],
+          pkg: _process[8]
+        };
+        list.push(_process);
+      }
+      return list;
+    }
+  }, {
     key: 'deviceInfo',
     value: function deviceInfo(device) {
 

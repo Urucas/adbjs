@@ -1,10 +1,11 @@
 {
   "name": "adbjs",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Call adb methods from node",
   "main": "bin/adbjs",
   "scripts": {
-    "build" : "make clean && make node"
+    "build" : "make clean && make node",
+    "local" : "npm run build && node ./tests/index.js"
   },
   "repository": {
     "type": "git",
