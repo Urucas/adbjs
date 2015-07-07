@@ -85,15 +85,17 @@ var ADB = (function () {
       var output = child.stdout.toString().split('\r\n');
       var list = [];
       for (var i = 0; i < output.length; i++) {
-        var _process = output[i];
-        if (!/u\d_\w\d+/.test(_process)) continue;
-        _process = _process.split(/\s+/);
-        _process = {
-          user: _process[0],
-          pid: _process[1],
-          pkg: _process[8]
-        };
-        list.push(_process);
+        try {
+          var _process = output[i];
+          if (!/u\d_\w\d+/.test(_process)) continue;
+          _process = _process.split(/\s+/);
+          _process = {
+            user: _process[0],
+            pid: _process[1],
+            pkg: _process[8]
+          };
+          list.push(_process);
+        } catch (e) {}
       }
       return list;
     }
@@ -137,6 +139,33 @@ var ADB = (function () {
       for (var i in packages) {
         if (packages[i] == _package_) return true;
       }return false;
+    }
+  }, {
+    key: 'promptUninstall',
+    value: function promptUninstall(_package_) {
+
+      if (!this.selected_device) {
+        throw new Error('No device selected');
+        return;
+      }
+      if (!this.isDeviceAvailable(this.selected_device)) {
+        throw new Error('Device no longer available');
+        return;
+      }
+
+      var params = ['shell', 'am', 'start', '-a', 'android.intent.action.DELETE', '-d', 'package:' + _package_];
+      if (this.selected_device) {
+        params.unshift(this.selected_device);
+        params.unshift('-s');
+      }
+
+      var child = _child_process2['default'].spawnSync('adb', params);
+      if (child.stderr && child.stderr.toString() != '') {
+        throw new Error(' ' + child.stderr);
+        return;
+      }
+      var output = child.stdout.toString().trim().replace('\r\n', '');
+      console.log(output);
     }
   }, {
     key: 'uninstall',
