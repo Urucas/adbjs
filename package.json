@@ -6,6 +6,7 @@
   "scripts": {
     "build": "make clean && make node",
     "example": "npm run build && node ./example/index.js",
+    "pretest": "./node_modules/adb-mock/bin/adb",
     "test": "node_modules/mocha/bin/mocha tests/* --compilers js:babel/register -t 15s --require mocha-clean"
   },
   "repository": {
@@ -26,7 +27,7 @@
   },
   "homepage": "https://github.com/Urucas/adbjs",
   "dependencies": {
-    "adb-mock": "0.0.4",
+    "adb-mock": "0.0.5",
     "babel": "5.1.13"
   },
   "devDependencies": {
