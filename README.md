@@ -1,4 +1,4 @@
-# adbjs
+# adbjs [![Build Status](https://travis-ci.org/Urucas/adbjs.svg)](https://travis-ci.org/Urucas/adbjs)
 Use adb from node
 
 #Requirements
