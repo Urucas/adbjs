@@ -4,8 +4,9 @@
   "description": "Call adb methods from node",
   "main": "bin/adbjs",
   "scripts": {
-    "build" : "make clean && make node",
-    "example" : "npm run build && node ./example/index.js"
+    "build": "make clean && make node",
+    "example": "npm run build && node ./example/index.js",
+    "test": "node_modules/mocha/bin/mocha tests/* --compilers js:babel/register -t 15s --require mocha-clean"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,10 @@
   "homepage": "https://github.com/Urucas/adbjs",
   "dependencies": {
     "babel": "^5.1.13"
+  },
+  "devDependencies": {
+    "adb-mock": "0.0.1",
+    "mocha": "^2.2.5",
+    "mocha-clean": "^0.4.0"
   }
 }
