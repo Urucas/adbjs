@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/Urucas/adbjs",
   "dependencies": {
-    "babel": "^5.1.13"
+    "adb-mock": "0.0.4",
+    "babel": "5.1.13"
   },
   "devDependencies": {
-    "adb-mock": "0.0.1",
-    "mocha": "^2.2.5",
-    "mocha-clean": "^0.4.0"
+    "mocha": "2.2.5",
+    "mocha-clean": "0.4.0"
   }
 }
