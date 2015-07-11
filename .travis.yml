@@ -4,4 +4,6 @@ node_js:
   - "0.10"
   - iojs
   - iojs-v1.0.2
-before_script: source ./node_modules/adb-mock/bin/adb
+before_script: 
+  source ./node_modules/adb-mock/bin/adb
+  adb version
