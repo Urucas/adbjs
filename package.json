@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Urucas/adbjs",
   "dependencies": {
-    "adb-mock": "0.0.7"
+    "adb-mock": "0.0.9"
   },
   "devDependencies": {
     "babel": "5.1.13",

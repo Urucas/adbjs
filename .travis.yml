@@ -5,5 +5,5 @@ node_js:
   - iojs
   - iojs-v1.0.2
 before_script: 
-  source ./node_modules/adb-mock/bin/adb
-  adb version
+  - source ./node_modules/adb-mock/bin/adb.sh
+  - adb version
