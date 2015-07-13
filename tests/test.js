@@ -37,5 +37,14 @@ describe("adbjs tests", () => {
     done();
   });
 
+  it("should set the device", (done) => {
+    let device_id = '07042e0e13cca2d0';
+    let device_info = adb.deviceInfo(device_id);
+    expect(device_info.id).to.deep.equal(device_id);
+    expect(device_info.model).to.deep.equal('Nexus 5');
+    expect(device_info.version).to.deep.equal('5.1.1');
+    done();
+  });
+
 });
 
