@@ -1,29 +1,40 @@
 import ADB from '../lib/adb';
+import chai from 'chai';
 
-describe("ADB instance test", () => {
+let expect = chai.expect;
+
+describe("adbjs tests", () => {
   
   let adb = new ADB();
 
-  it("Test adb.version", (done) => {
+  it("should return version", (done) => {
     let version = adb.version();
     if(!/Android Debug Bridge version [\d\.]+/.test(version)) 
       throw new Error("returns wrong version format:"+version);
     done();
   });
  
-  it("Test adb.devices", (done) => {
+  it("should return devices list", (done) => {
     let devices = adb.devices();
     if(devices instanceof Array) 
       return done();
     throw new Error("devices doesnt returns array, "+devices);
   });
 
-  it("Test adb.userProcessList", (done) => {
+  it("should return user process list", (done) => {
     // mock device id 07042e0e13cca2d0
     let list = adb.userProcessList("07042e0e13cca2d0");
     if(list instanceof Array) 
       return done();
     throw new Error("devices doesnt returns array, "+list);
+  });
+
+  it("should set the device", (done) => {
+    let device = { id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' };
+    adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' });
+    let selected_device = adb.selected_device;
+    expect(selected_device).to.deep.equal(device);
+    done();
   });
 
 });
