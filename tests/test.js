@@ -37,7 +37,7 @@ describe("adbjs tests", () => {
     done();
   });
 
-  it("should set the device", (done) => {
+  it("should get the device info", (done) => {
     let device_id = '07042e0e13cca2d0';
     let device_info = adb.deviceInfo(device_id);
     expect(device_info.id).to.deep.equal(device_id);
