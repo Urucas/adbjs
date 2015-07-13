@@ -25,10 +25,9 @@
     "url": "https://github.com/Urucas/adbjs/issues"
   },
   "homepage": "https://github.com/Urucas/adbjs",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "adb-mock": "^0.1.3",
+    "adb-mock": "^0.1.4",
     "babel": "5.1.13",
     "chai": "^3.0.0",
     "mocha": "2.2.5",
