@@ -67,5 +67,18 @@ ADB.closeApp("com.google.android.youtube");
 
 // install a package
 ADB.install("/path/to/my/zoster_testapp.apk", "com.urucas.zoster_testapp");
+
+// get wlan0 ip
+var ip = ABD.getDeviceWlan0()
+console.log(ip)
+// 192.168.0.105
+
+// connect a device via tcpip
+var conn = ADB.tcpConnect()
+console.log(conn)
+// 192.168.0.105:5555
+
+// disconnect device
+ADB.tcpDisconnect(conn)
 ```
 
