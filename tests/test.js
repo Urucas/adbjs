@@ -20,7 +20,8 @@ describe("adbjs tests", () => {
       return done();
     throw new Error("devices doesnt returns array, "+devices);
   });
-
+  
+  /*
   it("should return user process list", (done) => {
     // mock device id 07042e0e13cca2d0
     let list = adb.userProcessList("07042e0e13cca2d0");
@@ -28,7 +29,9 @@ describe("adbjs tests", () => {
       return done();
     throw new Error("devices doesnt returns array, "+list);
   });
+  */
 
+  /*
   it("should set the device", (done) => {
     let device = { id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' };
     adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' });
@@ -45,6 +48,29 @@ describe("adbjs tests", () => {
     expect(device_info.version).to.deep.equal('5.1.1');
     done();
   });
-
+  */
+  
+  it("should return a device wlan0 ip", (done) => {
+    let devices = adb.devices();
+    let ip = adb.getDeviceWlan0();
+    if(ip == null) {
+      done();
+      return;
+    }
+    let re = /\d+\.\d+\.\d+\.\d+/ig
+    if(re.test(ip)) {
+      done();
+      return;
+    }
+    throw new Error("Error getting device ip, result: "+ip);
+  })
+  /*
+  it("shuld connect a device via tcpip", (done) => {
+    let devices = adb.devices();
+    console.log(devices);
+    let output = adb.tcpConnect();
+    console.log(output);
+  });
+  */
 });
 
