@@ -64,13 +64,28 @@ describe("adbjs tests", () => {
     }
     throw new Error("Error getting device ip, result: "+ip);
   })
-  /*
-  it("shuld connect a device via tcpip", (done) => {
+  
+  it("should connect & disconnect a device via tcpip", (done) => {
     let devices = adb.devices();
-    console.log(devices);
-    let output = adb.tcpConnect();
-    console.log(output);
+    for(let i=0; i<devices.length;i++) {
+      let device = devices[i];
+      if(device.id.indexOf(":5555") != -1)
+        adb.tcpDisconnect(device.id)
+    }
+    // update devices list
+    devices = adb.devices();
+    
+    let conn = adb.tcpConnect();
+    let re = /\d+\.\d+\.\d+\.\d+\:5555/ig
+    if(re.test(conn)) {
+      // device connected
+      // lets disconnect the device
+      adb.tcpDisconnect(conn);
+      done();
+      return;
+    }
+    throw new Error("Error connecting device; "+conn);
   });
-  */
+  
 });
 
