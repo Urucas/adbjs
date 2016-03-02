@@ -5,6 +5,7 @@
   "main": "bin/adbjs",
   "scripts": {
     "build": "make clean && make node",
+    "prepublish": "npm run build",
     "example": "npm run build && node ./example/index.js",
     "test": "node_modules/mocha/bin/mocha tests/* --compilers js:babel/register -t 15s --require mocha-clean"
   },
