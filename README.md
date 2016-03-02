@@ -80,5 +80,16 @@ console.log(conn)
 
 // disconnect device
 ADB.tcpDisconnect(conn)
+
+// lock device
+ADB.lock()
+
+// unlock device
+ADB.unlock()
+
+// get information about the power display
+let power = ADB.power()
+console.log(power)
+// { display_power: 'ON' }
 ```
 
