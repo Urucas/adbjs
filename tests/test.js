@@ -15,7 +15,6 @@ describe("adbjs tests", () => {
     done();
   });
   
- 
   it("should return devices list", (done) => {
     let devices = adb.devices();
     if(devices instanceof Array) 
