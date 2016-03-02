@@ -2,6 +2,7 @@ import ADB from '../lib/adb';
 import chai from 'chai';
 
 let expect = chai.expect;
+let should = chai.should();
 
 describe("adbjs tests", () => {
   
@@ -13,6 +14,7 @@ describe("adbjs tests", () => {
       throw new Error("returns wrong version format:"+version);
     done();
   });
+  
  
   it("should return devices list", (done) => {
     let devices = adb.devices();
@@ -21,7 +23,45 @@ describe("adbjs tests", () => {
     throw new Error("devices doesnt returns array, "+devices);
   });
   
+  it("should get information about the device power", (done) => {
+    let power = adb.power();
+    power.should.not.equal(undefined);
+    expect(power).to.be.a("object");
+    power["display_power"].should.not.equal(undefined);
+    if(power["display_power"] != "ON" && power["display_power"] != "OFF")
+      throw new Error("display_power error value; "+ power["display_power"]);
+    done()
+  })
+  
+  it("should lock screen", (done) => {
+    adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '6.0.1' })
+    adb.lock()
+    setTimeout( _ => {
+      let power = adb.power()
+      power["display_power"].should.equal("OFF")
+      done()
+    }, 1000)
+  })
+  
+  it("should unlock screen", (done) => {
+    adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '6.0.1' })
+    adb.unlock()
+    setTimeout( _ => {
+      let power = adb.power()
+      power["display_power"].should.equal("ON")
+      done()
+    }, 1000)
+  })
+  
   /*
+  it("should not duplicate devices on connection/disconnection", (done) => {
+    let devices = adb.devices();
+    setTimeout( () => {
+      devices = adb.devices();
+    }, 3000)
+  })
+  */
+  
   it("should return user process list", (done) => {
     // mock device id 07042e0e13cca2d0
     let list = adb.userProcessList("07042e0e13cca2d0");
@@ -29,9 +69,7 @@ describe("adbjs tests", () => {
       return done();
     throw new Error("devices doesnt returns array, "+list);
   });
-  */
-
-  /*
+  
   it("should set the device", (done) => {
     let device = { id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' };
     adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' });
@@ -45,10 +83,10 @@ describe("adbjs tests", () => {
     let device_info = adb.deviceInfo(device_id);
     expect(device_info.id).to.deep.equal(device_id);
     expect(device_info.model).to.deep.equal('Nexus 5');
-    expect(device_info.version).to.deep.equal('5.1.1');
+    expect(device_info.version).to.deep.equal('6.0.1');
     done();
   });
-  */
+  
   
   it("should return a device wlan0 ip", (done) => {
     let devices = adb.devices();

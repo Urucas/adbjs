@@ -56,7 +56,7 @@ var ADB = (function () {
             if (!/device/ig.test(match_devices[i])) continue;
             var did = match_devices[i].replace(/\tdevice/ig, "");
             did = did.replace(/\n/ig, "");
-            if (this.device.indexOf(did) != -1) continue;
+            if (this.isDeviceOnList(did)) continue;
 
             var device_info = this.deviceInfo(did);
             this.device.push(device_info);
@@ -65,6 +65,19 @@ var ADB = (function () {
 
         this.selected_device = this.selected_device || this.device[0];
         return this.device;
+      },
+      writable: true,
+      configurable: true
+    },
+    isDeviceOnList: {
+      value: function isDeviceOnList(did) {
+        for (var i = 0; i < this.device.length; i++) {
+          var device = this.device[i];
+          if (device.id == did) {
+            return true;
+          }
+        }
+        return false;
       },
       writable: true,
       configurable: true
