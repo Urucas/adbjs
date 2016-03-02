@@ -17,32 +17,33 @@ npm run build
 
 #Usage
 ```javascript
-var ADB = new (require('adbjs'))();
+import ADB from 'adbjs'
+let adb = new ADB()
 
 // Getting adb version
-var version = ADB.version();
-console.log(version);
+let version = adb.version()
+console.log(version)
 // Android Debug Bridge version 1.0.32
 
 // Getting devices
-var devices = ADB.devices()
+let devices = adb.devices()
 console.log(devices)
 // [ '07042e0e13cca2d0' ]
 
-var deviceInfo = ADB.deviceInfo(devices[0]);
-console.log(deviceInfo);
+let deviceInfo = adb.deviceInfo(devices[0])
+console.log(deviceInfo)
 // { id: '07042e0e13cca2d0', model: 'Nexus 5', version: '5.1.1' }
 
 // select device
-ADB.selectDevice(devices[0]);
+adb.selectDevice(devices[0])
 
 // check if device is available
-var isAvailable = ADB.isDeviceAvailable('07042e0e13cca2d0');
-console.log(isAvailable);
+let isAvailable = adb.isDeviceAvailable('07042e0e13cca2d0')
+console.log(isAvailable)
 // true
 
 // list installed packages
-var packages = ADB.listPackages();
+let packages = adb.listPackages()
 /* 
  * [ 'com.skype.raider',
  *   'com.google.android.youtube',
@@ -53,42 +54,42 @@ var packages = ADB.listPackages();
 */ 
 
 // check if a package is installed
-var isInstalled = ADB.isPackageInstalled("com.urucas.zoster_testpp");
-console.log(isInstalled);
+let isInstalled = adb.isPackageInstalled("com.urucas.zoster_testpp")
+console.log(isInstalled)
 // false
 
 // check if package is currently running
-var isRunning = ADB.isAppRunning("com.google.android.youtube");
-console.log(isRunning);
+let isRunning = adb.isAppRunning("com.google.android.youtube")
+console.log(isRunning)
 // true 
 
 // close a application running
-ADB.closeApp("com.google.android.youtube");
+adb.closeApp("com.google.android.youtube")
 
 // install a package
-ADB.install("/path/to/my/zoster_testapp.apk", "com.urucas.zoster_testapp");
+adb.install("/path/to/my/zoster_testapp.apk", "com.urucas.zoster_testapp")
 
 // get wlan0 ip
-var ip = ABD.getDeviceWlan0()
+let ip = adb.getDeviceWlan0()
 console.log(ip)
 // 192.168.0.105
 
 // connect a device via tcpip
-var conn = ADB.tcpConnect()
+let conn = adb.tcpConnect()
 console.log(conn)
 // 192.168.0.105:5555
 
 // disconnect device
-ADB.tcpDisconnect(conn)
+adb.tcpDisconnect(conn)
 
 // lock device
-ADB.lock()
+adb.lock()
 
 // unlock device
-ADB.unlock()
+adb.unlock()
 
 // get information about the power display
-let power = ADB.power()
+let power = adb.power()
 console.log(power)
 // { display_power: 'ON' }
 ```
