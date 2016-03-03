@@ -30,6 +30,8 @@ describe("adbjs tests", () => {
     power["display_power"].should.not.equal(undefined);
     if(power["display_power"] != "ON" && power["display_power"] != "OFF")
       throw new Error("display_power error value; ");
+    power["battery_level"].should.not.equal(undefined);
+    expect(power["battery_level"]).to.match(/\d+/);
     done()
   })
   
