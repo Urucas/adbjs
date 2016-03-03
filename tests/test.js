@@ -8,6 +8,7 @@ describe("adbjs tests", () => {
   
   let adb = new ADB();
 
+  
   it("should return version", (done) => {
     let version = adb.version();
     if(!/Android Debug Bridge version [\d\.]+/.test(version)) 
@@ -28,10 +29,11 @@ describe("adbjs tests", () => {
     expect(power).to.be.a("object");
     power["display_power"].should.not.equal(undefined);
     if(power["display_power"] != "ON" && power["display_power"] != "OFF")
-      throw new Error("display_power error value; "+ power["display_power"]);
+      throw new Error("display_power error value; ");
     done()
   })
   
+  /*
   it("should lock screen", (done) => {
     adb.selectDevice({ id: '07042e0e13cca2d0', model: 'Nexus 5', version: '6.0.1' })
     adb.lock()
@@ -51,6 +53,7 @@ describe("adbjs tests", () => {
       done()
     }, 1000)
   })
+  */
   
   /*
   it("should not duplicate devices on connection/disconnection", (done) => {
@@ -102,6 +105,7 @@ describe("adbjs tests", () => {
     throw new Error("Error getting device ip, result: "+ip);
   })
   
+  /*
   it("should connect & disconnect a device via tcpip", (done) => {
     let devices = adb.devices();
     for(let i=0; i<devices.length;i++) {
@@ -123,6 +127,6 @@ describe("adbjs tests", () => {
     }
     throw new Error("Error connecting device; "+conn);
   });
-  
+  */
 });
 
