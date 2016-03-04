@@ -59,11 +59,11 @@ var ADB = function () {
         for (var i in match_devices) {
           if (match_devices[i] == "") continue;
           if (!/device/ig.test(match_devices[i])) continue;
-          var did = match_devices[i].replace(/\tdevice/ig, "");
-          did = did.replace(/\n/ig, "");
-          if (this.isDeviceOnList(did)) continue;
+          var _did = match_devices[i].replace(/\tdevice/ig, "");
+          _did = _did.replace(/\n/ig, "");
+          if (this.isDeviceOnList(_did)) continue;
 
-          var device_info = this.deviceInfo(did);
+          var device_info = this.deviceInfo(_did);
           this.device.push(device_info);
         }
       }
@@ -152,10 +152,12 @@ var ADB = function () {
   }, {
     key: 'unlock',
     value: function unlock() {
-      var did = this.selected_device.id;
-      if (!this.isDeviceAvailable(did)) {
-        throw new Error("Device no longer available");
-        return;
+      if (this.selected_device) {
+        did = this.selected_device.id;
+        if (!this.isDeviceAvailable(did)) {
+          throw new Error("Device no longer available");
+          return;
+        }
       }
       var power = this.power();
       if (power["display_power"] == "OFF") this.keyEvent(did, 82);
@@ -163,10 +165,13 @@ var ADB = function () {
   }, {
     key: 'lock',
     value: function lock() {
-      var did = this.selected_device.id;
-      if (!this.isDeviceAvailable(did)) {
-        throw new Error("Device no longer available");
-        return;
+      var did = false;
+      if (this.selected_device) {
+        did = this.selected_device.id;
+        if (!this.isDeviceAvailable(did)) {
+          throw new Error("Device no longer available");
+          return;
+        }
       }
       var power = this.power();
       if (power["display_power"] == "ON") this.keyEvent(did, 26);
@@ -188,12 +193,19 @@ var ADB = function () {
   }, {
     key: 'power',
     value: function power() {
-      var did = this.selected_device.id;
-      if (!this.isDeviceAvailable(did)) {
-        throw new Error("Device no longer available");
-        return;
+      var did = false;
+      if (this.selected_device) {
+        did = this.selected_device.id;
+        if (!this.isDeviceAvailable(did)) {
+          throw new Error("Device no longer available");
+          return;
+        }
       }
       var params = ["shell", "dumpsys", "power"];
+      if (did) {
+        params.unshift(did);
+        params.unshift("-s");
+      }
       var child = _child_process2.default.spawnSync("adb", params);
       if (child.stderr && child.stderr.toString() != "") {
         throw new Error(" " + child.stderr);
@@ -203,6 +215,8 @@ var ADB = function () {
       var power = {};
       var state = output.match(/Display\sPower\:\sstate\=[\w]+/);
       power["display_power"] = /ON$/.test(state) ? "ON" : "OFF";
+      var battery = output.match(/mBatteryLevel\=\d+/)[0];
+      power["battery_level"] = parseFloat(battery.replace("mBatteryLevel=", ""));
       return power;
     }
   }, {

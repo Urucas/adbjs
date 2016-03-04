@@ -91,6 +91,6 @@ adb.unlock()
 // get information about the power display
 let power = adb.power()
 console.log(power)
-// { display_power: 'ON' }
+// { display_power: 'ON', "battery_level": 93 }
 ```
 

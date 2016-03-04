@@ -1,6 +1,6 @@
 {
   "name": "adbjs",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Call adb methods from node",
   "main": "./bin/adb.js",
   "scripts": {
