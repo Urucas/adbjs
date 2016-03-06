@@ -92,5 +92,23 @@ adb.unlock()
 let power = adb.power()
 console.log(power)
 // { display_power: 'ON', "battery_level": 93 }
+
+```
+# Monitor
+Using adbjs to monitor a device changes
+
+``` node
+// emits an event on battery change
+let monitor = adb.monitor()
+monitor.on("battery", (power) => {
+  // { display_power: 'ON', "battery_level": 93 }
+  // { display_power: 'ON', "battery_level": 92 }
+})
+
+// emits an event on display changes [ON|OFF]
+monitor.on("display", (power) => {
+  // { display_power: 'ON', "battery_level": 93 }
+  // { display_power: 'OFF', "battery_level": 93 }
+})
 ```
 
