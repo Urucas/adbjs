@@ -98,11 +98,15 @@ console.log(power)
 Using adbjs to monitor a device changes
 
 ``` node
-// emits an event on battery change
 let monitor = adb.monitor()
+// emits an event on battery change
 monitor.on("battery", (power) => {
   // { display_power: 'ON', "battery_level": 93 }
   // { display_power: 'ON', "battery_level": 92 }
+  
+  // you may integrate this monitor to slack, 
+  // so if battery is to low send a notification
+  // { display_power: 'ON', "battery_level": 5 }
 })
 
 // emits an event on display changes [ON|OFF]
