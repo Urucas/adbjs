@@ -1,5 +1,7 @@
-# adbjs [![Build Status](https://travis-ci.org/Urucas/adbjs.svg)](https://travis-ci.org/Urucas/adbjs)
-Use adb from node
+# [DEPRECATED] adbjs [![Build Status](https://travis-ci.org/Urucas/adbjs.svg)](https://travis-ci.org/Urucas/adbjs)
+Use adb from node. 
+
+**I deprecated the library, I change to [appium-adb](https://github.com/appium/appium-adb) since it's already advanced in the features implemented**
 
 #Requirements
 * ADB
